@@ -8,6 +8,7 @@ using namespace std;
 
 class Level {
     private: 
+        int total_levels;
         int dimension;
         int grid_size;
         static int level_num;
@@ -24,7 +25,7 @@ class Level {
         void spawn_object(int num, char c);
     public: 
         Level();
-        Level(int level_size, int cp, int np, int gp, int kp, int mp);
+        Level(int num_levels, int level_size, int cp, int np, int gp, int kp, int mp);
         // ~Level();
         void printLevel();
 };

@@ -3,6 +3,7 @@
 
 Level::Level() {
     srand((unsigned) time(NULL));
+    total_levels = 0;
     dimension = 0;
     grid_size = 0;
     level_num++;
@@ -14,8 +15,9 @@ Level::Level() {
     mushroom_percentage = 0;
 }
 
-Level :: Level(int level_size, int cp, int np, int gp, int kp, int mp) {
+Level :: Level(int num_levels, int level_size, int cp, int np, int gp, int kp, int mp) {
     srand((unsigned) time(NULL));
+    total_levels = num_levels;
     dimension = level_size + 1;
     grid_size = level_size * level_size;
     level_num++;
@@ -50,18 +52,30 @@ void Level :: initializeGrid() {
     }
     else {
 
-        // for spawning Mario
-        char Mario = 'H';
-        spawn_object(1, Mario);
+        int remaining_slots = grid_size;
 
+        // for spawning Mario
+        if (level_num == 1) {
+            char Mario = 'H';
+            spawn_object(1, Mario);
+            remaining_slots -= 1;
+        }
+
+        // for spawning Boss
         char Boss = 'b';
         spawn_object(1, Boss);
+        remaining_slots -= 1;
 
         // for spawning world pipe
+        if (level_num != total_levels) {
+            char World_pipe = 'w';
+            spawn_object(1, World_pipe);
+            remaining_slots -= 1;   
+        }
+
         char World_pipe = 'w';
         spawn_object(1, World_pipe);
-
-        int remaining_slots = grid_size - 3;
+        remaining_slots -= 1;
 
         int total_coin = remaining_slots * coin_percentage/100;
         int total_nothing = remaining_slots * nothing_percentage/100;
@@ -70,23 +84,26 @@ void Level :: initializeGrid() {
         int total_mushroom = remaining_slots * mushroom_percentage/100;
 
         //spawns coins
-
         char coin = 'c';
         spawn_object(total_coin, coin);
         remaining_slots -= total_coin;
 
+        //spawns nothing
         char nothing = 'x';
         spawn_object(total_nothing, nothing);
         remaining_slots -= total_nothing;
 
+        //spawns goomba
         char goomba = 'g';
         spawn_object(total_goomba, goomba);
         remaining_slots -= total_goomba;
 
+        //spawns koopa
         char koopa = 'k';
         spawn_object(total_koopa, koopa);
         remaining_slots -= total_koopa;
 
+        //spawns mushroom
         char mushroom = 'm';
         spawn_object(remaining_slots, mushroom);
 

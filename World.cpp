@@ -1,8 +1,16 @@
 #include "World.h"
 
-// World :: World() {
+World :: World() {
+    total_levels = 0;
+    levels = 0;
+    dimension = 0;
+    coin_percentage = 0;
+    nothing_percentage = 0;
+    goomba_percentage = 0;
+    koopa_percentage = 0;
+    mushroom_percentage = 0;
 
-// }
+}
 
 World :: World(int num_levels, int level_size, int cp, int np, int gp, int kp, int mp) {
     total_levels = num_levels;
@@ -19,12 +27,12 @@ World :: World(int num_levels, int level_size, int cp, int np, int gp, int kp, i
 
 void World :: initializeWorld() {
     for (int i = 0; i < total_levels; ++i) {
-        levels[i] = new Level(dimension, coin_percentage, nothing_percentage, goomba_percentage, koopa_percentage, mushroom_percentage);
+        levels[i] = new Level(total_levels, dimension, coin_percentage, nothing_percentage, goomba_percentage, koopa_percentage, mushroom_percentage);
     }
 }
 
 void World :: printWorld() {
-    for (int i = 0; i < total_levels; ++i) {
+    for (int i = total_levels - 1; i >= 0; --i) {
         levels[i]->printLevel();
         cout << endl;
     }
