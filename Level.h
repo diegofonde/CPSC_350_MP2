@@ -10,6 +10,7 @@ class Level {
     private: 
         int dimension;
         int grid_size;
+        static int level_num;
         char **grid;
         int coin_percentage;
         int nothing_percentage;
@@ -20,8 +21,9 @@ class Level {
         unsigned int i_random;
         unsigned int j_random;
         void int_random();
+        void spawn_object(int num, char c);
     public: 
-        // Level();
+        Level();
         Level(int level_size, int cp, int np, int gp, int kp, int mp);
         // ~Level();
         void printLevel();
