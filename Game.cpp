@@ -1,17 +1,21 @@
 #include "Game.h"
 
 Game::Game(std::string inputFile, std::string outputFile){
-    //TODO: create world and mario variables
+    //TODO: create world mario variables
 
     processFile(inputFile);
     gameOver = false;
+
+    world = new World(L, N, coinPercent, blankPercent, goombaPercent, koopaPercent, mushroomPercent);
 }
 
 Game::~Game(){
-    //TODO: delete pointers
+    //TODO: delete mario
+    delete world;
 }
 
 void runGame(){
+    world->printWorld();
     //TODO: implement game loop
 }
 

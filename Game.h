@@ -4,7 +4,8 @@
 #include <iostream>
 #include <fstream> 
 
-//#include "World.h"
+#include "World.h"
+
 class Game{
     public:
         Game(std::string inputFile, std::string outputFile); //constructor that takes in inputFile and output File
@@ -24,10 +25,10 @@ class Game{
         int koopaPercent; //aproximate percent of positions in a level that are koopas
         int mushroomPercent; //aproximate percent of positions in a level that are mushrooms
         bool gameOver; //whether the game is over or not
+        World *world;
 
         //To Add:
         //Mario *mario;
-        //Word *world;
 };
 
 #endif
