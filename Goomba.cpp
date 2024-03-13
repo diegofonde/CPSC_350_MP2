@@ -1,15 +1,6 @@
-/*#include "Goomba.h"
+#include "Goomba.h"
 
-Goomba::Goomba(int level, int locationX, int locationY){
-    GameEnemy(level, locationX, locationY);
-    displayCharacter = 'g'; //meant to be a parent only class
-    winPercent = -1;
+Goomba::Goomba(int level, int locationX, int locationY) : GameEnemy(level, locationX, locationY){
+    displayCharacter = 'g';
+    winPercent = 20;
 }
-
-char Goomba::getDisplayCharacter(){
-    return displayCharacter;
-}
-
-int Goomba::getwinPercent(){
-    return winPercent;
-}*/

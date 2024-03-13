@@ -3,11 +3,10 @@
 
 #include "GameObject.h"
 
-class WarpPipe: GameObject{
+class WarpPipe: public GameObject{
 
 public: 
     WarpPipe(int level, int locationX, int locationY); //overloaded constructor
-    char getDisplayCharacter(); //returns displayCharacter
 };
 
 #endif

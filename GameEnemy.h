@@ -3,11 +3,10 @@
 
 #include "GameObject.h"
 
-class GameEnemy: GameObject{
+class GameEnemy: public GameObject{
 
 public: 
     GameEnemy(int level, int locationX, int locationY); //overloaded constructor
-    char getDisplayCharacter(); //returns displayCharacter
     int getwinPercent(); //returns the win percent of the enemy
 
 protected:

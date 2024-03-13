@@ -14,7 +14,7 @@ Game::~Game(){
     delete world;
 }
 
-void runGame(){
+void Game::runGame(){
     world->printWorld();
     //TODO: implement game loop
 }

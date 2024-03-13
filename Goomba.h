@@ -3,12 +3,10 @@
 
 #include "GameEnemy.h"
 
-class Goomba: GameEnemy{
+class Goomba: public GameEnemy{
 
 public: 
     Goomba(int level, int locationX, int locationY); //overloaded constructor
-    char getDisplayCharacter(); //returns displayCharacter
-    int getwinPercent(); //returns the win percent of the enemy
 };
 
 #endif

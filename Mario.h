@@ -3,12 +3,10 @@
 
 #include "GameObject.h"
 
-class Mario: GameObject{
+class Mario: public GameObject{
 
 public: 
     Mario(int level, int locationX, int locationY); //overloaded constructor
-    char getDisplayCharacter(); //returns displayCharacter
-
 };
 
 #endif
