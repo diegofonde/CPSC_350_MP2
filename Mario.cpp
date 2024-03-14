@@ -9,14 +9,51 @@ Mario::Mario(int V) : GameObject(){
     coins = 0;
     powerLevel = 0;
     enemiesDefeated = 7;
+    marioHasWon = false;
 }
 
+//Needed??
 Mario::Mario(int level, int locationX, int locationY, int V) : GameObject(level, locationX, locationY){
     displayCharacter = 'H';
     V = V;
     coins = 0;
     powerLevel = 0;
     enemiesDefeated = 0;
+}
+
+void Mario::placeMario(){
+    locationX = rand() % (N);
+    locationY = rand() % (N);
+}
+
+void Mario::move(){
+    int moveDirection = rand() % 4;
+    switch (moveDirection){
+        case 0: //up
+            locationY++;
+        case 1: //down
+            locationY--;
+        case 2: //left
+            locationX--;
+        case 3: 
+            locationX++;
+    }
+    adjustForLevelWrapping();
+}
+
+void Mario::adjustForLevelWrapping(){
+    if (locationY >= N){ //up
+        locationY = 0;
+    }
+    else if (locationY < 0){ //down
+        locationY = N-1;
+    }
+    else if (locationX < 0){ //left
+        locationX = N-1;
+    }
+    else if (locationX >= N){ //right
+        locationX = 0;
+    }
 }
 
 bool Mario::interactWithObject(GameObject gameObject){
@@ -52,7 +89,8 @@ bool Mario::interactWithCoin(GameObject coin){
 }
 
 bool Mario::interactWithWarpPipe(GameObject warpPipe){
-    //TODO: IMPLEMENT
+    level++;
+    placeMario();
     return true;
 }
 
@@ -84,7 +122,13 @@ void Mario::marioDefeatsEnemy(GameEnemy enemy){
 }
 
 void Mario::marioDefeatsBoss(GameEnemy boss){
-    //TODO
+    if (totalLevels == level){ //mario has defeated the last boss //Need to to total levels - 1?
+        marioHasWon = true;
+    }
+    else{ //mario moves on to the next level
+        level++;
+        placeMario();
+    }
 }
 
 void Mario::marioLosesToBoss(){
@@ -111,6 +155,10 @@ void Mario::marioLosesALife(){
     enemiesDefeated = 0;
 }
 
+void Mario::setN(int N){
+    N = N;
+}
 
-
-
+void Mario::setTotalLevels(int totalLevels){
+    totalLevels = totalLevels;
+}
