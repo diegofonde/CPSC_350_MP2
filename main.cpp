@@ -11,12 +11,12 @@
 #include "LevelBoss.h"
 
 int main(){
-    /*Game *testGame = new Game("input-spec.txt", "log.txt");
+    Game *testGame = new Game("input-spec.txt", "log.txt");
     testGame->runGame();
-    delete testGame;*/
+    delete testGame;
 
-    LevelBoss *testGoomba = new LevelBoss(0,0,0);   
+    /*LevelBoss *testGoomba = new LevelBoss(0,0,0);   
     std::cout << testGoomba->getDisplayCharacter() << std::endl;
     std::cout << testGoomba->getwinPercent() << std::endl;
-    delete testGoomba;
+    delete testGoomba;*/
 }

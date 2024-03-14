@@ -3,6 +3,14 @@
 
 #include "Mario.h"
 
+Mario::Mario(int V) : GameObject(){
+    displayCharacter = 'H';
+    V = V;
+    coins = 0;
+    powerLevel = 0;
+    enemiesDefeated = 7;
+}
+
 Mario::Mario(int level, int locationX, int locationY, int V) : GameObject(level, locationX, locationY){
     displayCharacter = 'H';
     V = V;

@@ -7,6 +7,7 @@
 class Mario: public GameObject{
 
 public: 
+    Mario(int V); //overloaded constructor that takes in number of lives
     Mario(int level, int locationX, int locationY, int V); //overloaded constructor
 
     //primary methods

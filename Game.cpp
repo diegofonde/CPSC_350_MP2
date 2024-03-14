@@ -6,6 +6,7 @@ Game::Game(std::string inputFile, std::string outputFile){
     processFile(inputFile);
     gameOver = false;
 
+    mario = new Mario(V);
     world = new World(L, N, coinPercent, blankPercent, goombaPercent, koopaPercent, mushroomPercent);
 }
 
@@ -16,17 +17,24 @@ Game::~Game(){
 
 void Game::runGame(){
     world->printWorld();
+    //add mario to world
+
+    //loop:
+    //mario interacts, loop for repeated interaction inside level
+    //mario moves
+    //update level to reflect mario moving
+    //check for gameOver
+
     //TODO: implement game loop
 }
 
 void Game::processFile(std::string inputFile){
-    //TODO: process file and assign variables with proper values
     std::string stringContents; //used to move through inputFile
     std::ifstream readFile(inputFile); //opens input file to read from
     int lineNum = 1; //tracks current line of file
 
     while (std::getline(readFile, stringContents)){
-        std::cout << stringContents << std::endl;
+        //std::cout << stringContents << std::endl;
 
         switch (lineNum){ //assigns proper variable with number based on the line
             case 1:
@@ -52,6 +60,6 @@ void Game::processFile(std::string inputFile){
         lineNum++;
     }
 
-    std::cout << koopaPercent << std::endl;
+    //std::cout << koopaPercent << std::endl;
 }
 

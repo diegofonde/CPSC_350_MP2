@@ -6,7 +6,12 @@ class GameObject{
         GameObject(); //default constructor
         GameObject(int level, int locationX, int locationY); //constructor with location of object
         ~GameObject(); //destructor
+
+        //getter methods
         char getDisplayCharacter(); //returns displayCharacter
+        int getLevel();
+        int getLocationX();
+        int getLocationY();
 
     protected: 
         int level; //what level the object is in

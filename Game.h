@@ -5,6 +5,8 @@
 #include <fstream> 
 
 #include "World.h"
+#include "Mario.h"
+#include "Mushroom.h"
 
 class Game{
     public:
@@ -25,10 +27,9 @@ class Game{
         int koopaPercent; //aproximate percent of positions in a level that are koopas
         int mushroomPercent; //aproximate percent of positions in a level that are mushrooms
         bool gameOver; //whether the game is over or not
-        World *world;
+        World *world; //the world
+        Mario *mario; //mario
 
-        //To Add:
-        //Mario *mario;
 };
 
 #endif
