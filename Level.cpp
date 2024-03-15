@@ -183,6 +183,11 @@ void Level :: printLevel() {
     
 }
 
+void Level::addMario(Mario* mario){
+    mario = mario;
+    std::cout << mario->getLocationX() << std::endl;
+}
+
 // void Level :: spawnMario() {
 //     int_random();
 //     grid[i_random][j_random] = new Mario(level_num, i_random, j_random, total_lives);

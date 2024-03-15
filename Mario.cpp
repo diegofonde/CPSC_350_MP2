@@ -10,6 +10,7 @@ Mario::Mario(int V) : GameObject(){
     powerLevel = 0;
     enemiesDefeated = 7;
     marioHasWon = false;
+    //locationX = 5;
 }
 
 //Needed??
@@ -19,11 +20,13 @@ Mario::Mario(int level, int locationX, int locationY, int V) : GameObject(level,
     coins = 0;
     powerLevel = 0;
     enemiesDefeated = 0;
+    locationX = 5;
 }
 
 void Mario::placeMario(){
-    locationX = rand() % (N);
-    locationY = rand() % (N);
+    //locationX = rand() % (N);
+    locationX = 5;
+    //locationY = rand() % (N);
 }
 
 void Mario::move(){
@@ -64,6 +67,8 @@ bool Mario::interactWithObject(GameObject gameObject){
             return interactWithCoin(gameObject);
         case 'w':
             return interactWithWarpPipe(gameObject); //TODO: include interact with gameenemy here?
+        //case 'g' || 'k' || 'b':
+            //return interactWithEnemy((GameEnemy) gameObject);
         default:
             return false;
             //TODO: throw error

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Level.h"
+#include "Mario.h"
 using namespace std;
 
 class World {
@@ -16,9 +17,12 @@ class World {
         int goomba_percentage;
         int koopa_percentage;
         int mushroom_percentage;
+        Mario *mario;
     public: 
         World();
         World(int num_levels, int level_size, int cp, int np, int gp, int kp, int mp);
+
+        void addMario(Mario* mario); //passing in Mario to the World
         // ~World();
         void printWorld();
 

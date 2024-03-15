@@ -25,6 +25,12 @@ World :: World(int num_levels, int level_size, int cp, int np, int gp, int kp, i
     initializeWorld();
 }
 
+void World::addMario(Mario* mario){
+    mario = mario;
+    levels[0]->addMario(mario);
+}
+
+
 void World :: initializeWorld() {
     for (int i = 0; i < total_levels; ++i) {
         levels[i] = new Level(total_levels, dimension, coin_percentage, nothing_percentage, goomba_percentage, koopa_percentage, mushroom_percentage);

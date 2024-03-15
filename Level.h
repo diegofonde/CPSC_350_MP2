@@ -32,13 +32,15 @@ class Level {
         unsigned int i_random;
         unsigned int j_random;
         void int_random();
+        Mario *mario;
         // void spawn_object(int num, char c);
     public: 
         Level();
         Level(int num_levels, int level_size, int cp, int np, int gp, int kp, int mp);
         // ~Level();
         void printLevel();
-        // void spawnMario();
+        //void spawnMario();
+        void addMario(Mario* mario); //adds mario to the level
 };
 
 #endif

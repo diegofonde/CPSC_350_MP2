@@ -16,6 +16,8 @@ Game::~Game(){
 }
 
 void Game::runGame(){
+    mario->placeMario();
+    world->addMario(mario);
     world->printWorld();
     //add mario to world
 

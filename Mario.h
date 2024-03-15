@@ -23,7 +23,6 @@ public:
     //getter method
     bool getMarioHasWon(); //return if mario has won the game
 
-
 private:
     int V; //how many lives Mario has
     int coins; //how many coins mario has
@@ -32,7 +31,6 @@ private:
     int N; //the size of the level, used for move calculations
     int totalLevels; //used for determining if Mario has won
     bool marioHasWon; //if mario has won the game
-
 
     //interact methods, returns if the object should be deleted
     bool interactWithMushroom(GameObject mushroom); //TODO: deleteObject?

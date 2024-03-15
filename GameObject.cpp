@@ -23,3 +23,15 @@ GameObject::~GameObject(){
 char GameObject::getDisplayCharacter(){
     return displayCharacter;
 }
+
+int GameObject::getLevel(){
+    return level;
+}
+
+int GameObject::getLocationX(){
+    return locationX;
+}
+
+int GameObject::getLocationY(){
+    return locationY;
+}
