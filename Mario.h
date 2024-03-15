@@ -22,6 +22,7 @@ public:
 
     //getter method
     bool getMarioHasWon(); //return if mario has won the game
+    // int getN();
 
 private:
     int V; //how many lives Mario has

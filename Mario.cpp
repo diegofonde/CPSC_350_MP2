@@ -2,8 +2,10 @@
 #include <ctime>
 
 #include "Mario.h"
+#include <iostream>
 
 Mario::Mario(int V) : GameObject(){
+    srand((unsigned) time(NULL));
     displayCharacter = 'H';
     V = V;
     coins = 0;
@@ -15,6 +17,7 @@ Mario::Mario(int V) : GameObject(){
 
 //Needed??
 Mario::Mario(int level, int locationX, int locationY, int V) : GameObject(level, locationX, locationY){
+    srand((unsigned) time(NULL));
     displayCharacter = 'H';
     V = V;
     coins = 0;
@@ -24,9 +27,9 @@ Mario::Mario(int level, int locationX, int locationY, int V) : GameObject(level,
 }
 
 void Mario::placeMario(){
-    //locationX = rand() % (N);
-    locationX = 5;
-    //locationY = rand() % (N);
+    int index = N - 1; //if you want to double check if the randomizer works just replace N with the dimensions of level
+    locationX = rand() % (index);
+    locationY = rand() % (index);
 }
 
 void Mario::move(){
@@ -100,7 +103,7 @@ bool Mario::interactWithWarpPipe(GameObject warpPipe){
 }
 
 bool Mario::interactWithEnemy(GameEnemy enemy){
-    int successChance = rand() % 101; //TODO: improve random number?
+    int successChance = rand() % 100; //TODO: improve random number?
     if (successChance > enemy.getwinPercent()){ //mario Wins
         marioDefeatsEnemy(enemy);
         return true;
@@ -163,6 +166,10 @@ void Mario::marioLosesALife(){
 void Mario::setN(int N){
     N = N;
 }
+
+// int Mario :: getN() {
+//     return N;
+// }
 
 void Mario::setTotalLevels(int totalLevels){
     totalLevels = totalLevels;

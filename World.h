@@ -8,23 +8,23 @@ using namespace std;
 
 class World {
     private:
-        int total_levels;
-        Level **levels;
-        void initializeWorld();
-        int dimension;
-        int coin_percentage;
-        int nothing_percentage;
-        int goomba_percentage;
-        int koopa_percentage;
-        int mushroom_percentage;
+        int total_levels; //variable for total number of levels
+        Level **levels; //array that will hold all the levels
+        void initializeWorld(); //fills in the level array with levels
+        int dimension; //variable for the dimensions of the grid
+        int coin_percentage; //variable for coin percentage within the grid
+        int nothing_percentage; //variable for nothing percentage within the grid
+        int goomba_percentage; //variable for goomba percentage within the grid
+        int koopa_percentage; //variable for koopa percentage within the grid
+        int mushroom_percentage; //variable for mushroom percentage within the grid
         Mario *mario;
     public: 
-        World();
-        World(int num_levels, int level_size, int cp, int np, int gp, int kp, int mp);
+        World(); //default constructor
+        World(int num_levels, int level_size, int cp, int np, int gp, int kp, int mp); //overloaded constructor
 
         void addMario(Mario* mario); //passing in Mario to the World
         // ~World();
-        void printWorld();
+        void printWorld(); //prints out all the levels in world
 
 };
 

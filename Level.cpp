@@ -30,10 +30,12 @@ Level :: Level(int num_levels, int level_size, int cp, int np, int gp, int kp, i
 
     int_random();
 
+
     for (int i = 0; i < dimension; ++i) {
         grid[i] = new GameObject*[dimension];
     }
 
+    //fills the grid with game objects
     for (int i = 0; i < dimension; ++i) {
         for(int j = 0; j < dimension; ++j) {
             grid[i][j] = new GameObject();
@@ -43,12 +45,28 @@ Level :: Level(int num_levels, int level_size, int cp, int np, int gp, int kp, i
     initializeGrid();
 }
 
+Level :: ~Level() {
+    for (int i = 0; i < dimension; ++i) {
+        for(int j = 0; j < dimension; ++j) {
+            delete grid[i][j];
+        }
+    }
+
+    for (int i = 0; i < dimension; ++i) {
+        delete grid[i];
+    }
+
+    delete grid;
+
+    delete mario;
+}
+
 int Level :: level_num = 0;
 
 void Level :: initializeGrid() {
     if (coin_percentage + nothing_percentage + goomba_percentage + koopa_percentage + mushroom_percentage != 100
     || coin_percentage < 0 || nothing_percentage < 0 || goomba_percentage < 0 || koopa_percentage < 0 || mushroom_percentage < 0) {
-        cout << "Invalid input" << endl;
+        cout << "Invalid input" << endl; //checks if all the percentages added together is 100
     }
     else {
 
@@ -66,7 +84,7 @@ void Level :: initializeGrid() {
         remaining_slots--;
 
         // for spawning warp pipe
-
+        // makes sure that every level except for the last level has a warp pipe
         if (level_num < total_levels) {
             int total_characters = 0;
             while (total_characters < 1) {
@@ -81,7 +99,7 @@ void Level :: initializeGrid() {
             }
         }
 
-        
+        //calculates the spawn rate for coins, nothing, goomba, koopa and mushroom
         int total_coin = remaining_slots * coin_percentage/100;
         int total_nothing = remaining_slots * nothing_percentage/100;
         int total_goomba = remaining_slots * goomba_percentage/100;
@@ -163,6 +181,7 @@ void Level :: initializeGrid() {
 
 }
 
+//randomizer that is used to spawn the objects in a random part of the grid
 void Level :: int_random() {
     int index = dimension - 1;
     i_random = rand() % index;
@@ -170,7 +189,7 @@ void Level :: int_random() {
 }
 
 
-
+//used to print the level
 void Level :: printLevel() {
     for (int i = 0; i < dimension; ++i) {
         if(i != 0) {
@@ -186,9 +205,7 @@ void Level :: printLevel() {
 void Level::addMario(Mario* mario){
     mario = mario;
     std::cout << mario->getLocationX() << std::endl;
+    cout << mario->getLocationY() << endl;
+    grid[mario->getLocationX()][mario->getLocationY()] = mario;
+    //make mario interact with object 
 }
-
-// void Level :: spawnMario() {
-//     int_random();
-//     grid[i_random][j_random] = new Mario(level_num, i_random, j_random, total_lives);
-// }

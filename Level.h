@@ -18,28 +18,27 @@ using namespace std;
 
 class Level {
     private: 
-        int total_levels;
-        int dimension;
-        int grid_size;
-        static int level_num;
-        GameObject ***grid;
-        int coin_percentage;
-        int nothing_percentage;
-        int goomba_percentage;
-        int koopa_percentage;
-        int mushroom_percentage;
-        void initializeGrid();
-        unsigned int i_random;
-        unsigned int j_random;
-        void int_random();
+        int total_levels; //variable for total number of levels
+        int dimension; //variable for the dimensions of the grid
+        int grid_size; //variable for the area of the grid
+        static int level_num; //keeps count of number of level instances
+        GameObject ***grid; //variable for the grid that will contain game objects
+        int coin_percentage; //variable for coin percentage within the grid
+        int nothing_percentage; //variable for nothing percentage within the grid
+        int goomba_percentage; //variable for goomba percentage within the grid
+        int koopa_percentage; //variable for koopa percentage within the grid
+        int mushroom_percentage; //variable for mushroom percentage within the grid
+        void initializeGrid(); 
+        unsigned int i_random; //variable that will hold the randomized i value that will be assigned to a game object
+        unsigned int j_random;//variable that will hold the randomized j value that will be assigned to a game object
+        void int_random(); //method that will randomize the i and j values
         Mario *mario;
         // void spawn_object(int num, char c);
     public: 
-        Level();
-        Level(int num_levels, int level_size, int cp, int np, int gp, int kp, int mp);
-        // ~Level();
-        void printLevel();
-        //void spawnMario();
+        Level(); //default constructor
+        Level(int num_levels, int level_size, int cp, int np, int gp, int kp, int mp); //overloaded constructor
+        ~Level();
+        void printLevel(); //prints level
         void addMario(Mario* mario); //adds mario to the level
 };
 

@@ -7,6 +7,7 @@ Game::Game(std::string inputFile, std::string outputFile){
     gameOver = false;
 
     mario = new Mario(V);
+    mario->setN(N);
     world = new World(L, N, coinPercent, blankPercent, goombaPercent, koopaPercent, mushroomPercent);
 }
 
@@ -16,6 +17,7 @@ Game::~Game(){
 }
 
 void Game::runGame(){
+    world->printWorld();
     mario->placeMario();
     world->addMario(mario);
     world->printWorld();
