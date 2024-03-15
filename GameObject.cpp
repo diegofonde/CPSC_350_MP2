@@ -3,15 +3,17 @@
 #include "GameObject.h"
 
 GameObject::GameObject(){
-    level = -1;
-    locationX = -1;
-    locationY = -1;
+    level = 0;
+    locationX = 0;
+    locationY = 0;
+    displayCharacter = '\0';
 }
 
 GameObject::GameObject(int level, int locationX, int locationY){
     level = level;
     locationX = locationX;
     locationY = locationY;
+    displayCharacter = '\0';
 }
 
 GameObject::~GameObject(){
@@ -20,16 +22,4 @@ GameObject::~GameObject(){
 
 char GameObject::getDisplayCharacter(){
     return displayCharacter;
-}
-
-int GameObject::getLevel(){
-    return level;
-}
-
-int GameObject::getLocationX(){
-    return locationX;
-}
-
-int GameObject::getLocationY(){
-    return locationY;
 }

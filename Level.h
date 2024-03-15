@@ -4,6 +4,16 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include "GameObject.h"
+#include "GameEnemy.h"
+#include "Mario.h"
+#include "Goomba.h"
+#include "Koopa.h"
+#include "LevelBoss.h"
+#include "Coin.h"
+#include "WarpPipe.h"
+#include "Nothing.h"
+#include "Mushroom.h"
 using namespace std;
 
 class Level {
@@ -12,7 +22,7 @@ class Level {
         int dimension;
         int grid_size;
         static int level_num;
-        char **grid;
+        GameObject ***grid;
         int coin_percentage;
         int nothing_percentage;
         int goomba_percentage;
@@ -22,7 +32,8 @@ class Level {
         unsigned int i_random;
         unsigned int j_random;
         void int_random();
-        void spawn_object(int num, char c);
+        void isEmpty();
+        // void spawn_object(int num, char c);
     public: 
         Level();
         Level(int num_levels, int level_size, int cp, int np, int gp, int kp, int mp);

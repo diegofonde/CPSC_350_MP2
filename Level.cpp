@@ -21,7 +21,7 @@ Level :: Level(int num_levels, int level_size, int cp, int np, int gp, int kp, i
     dimension = level_size + 1;
     grid_size = level_size * level_size;
     level_num++;
-    grid = new char*[dimension];
+    grid = new GameObject**[dimension];
     coin_percentage = cp;
     nothing_percentage = np;
     goomba_percentage = gp;
@@ -31,14 +31,14 @@ Level :: Level(int num_levels, int level_size, int cp, int np, int gp, int kp, i
     int_random();
 
     for (int i = 0; i < dimension; ++i) {
-        grid[i] = new char[dimension];
+        grid[i] = new GameObject*[dimension];
     }
 
     for (int i = 0; i < dimension; ++i) {
-            for(int j = 0; j < dimension; ++j) {
-                grid[i][j] = ' ';
-            }
+        for(int j = 0; j < dimension; ++j) {
+            grid[i][j] = new GameObject();
         }
+    }
 
     initializeGrid();
 }
@@ -54,28 +54,29 @@ void Level :: initializeGrid() {
 
         int remaining_slots = grid_size;
 
-        // for spawning Mario
-        if (level_num == 1) {
-            char Mario = 'H';
-            spawn_object(1, Mario);
-            remaining_slots -= 1;
+        // for spawning boss
+        for(int i = 0; i < 1; ++i) {
+            if (grid[i_random][j_random]->getDisplayCharacter() == '\0') {
+                grid[i_random][j_random] = new LevelBoss(level_num, i_random, j_random);
+            }
+            else {
+                int_random();
+            }
         }
+        remaining_slots--;
 
-        // for spawning Boss
-        char Boss = 'b';
-        spawn_object(1, Boss);
-        remaining_slots -= 1;
-
-        // for spawning world pipe
-        if (level_num != total_levels) {
-            char World_pipe = 'w';
-            spawn_object(1, World_pipe);
-            remaining_slots -= 1;   
+        // for spawning warp pipe
+        if (level_num == total_levels) {
+            for(int i = 0; i < 1; ++i) {
+                if (grid[i_random][j_random]->getDisplayCharacter() == '\0') {
+                    grid[i_random][j_random] = new LevelBoss(level_num, i_random, j_random);
+                    remaining_slots -= 1;
+                }
+                else {
+                    int_random();
+                }
+            }
         }
-
-        char World_pipe = 'w';
-        spawn_object(1, World_pipe);
-        remaining_slots -= 1;
 
         int total_coin = remaining_slots * coin_percentage/100;
         int total_nothing = remaining_slots * nothing_percentage/100;
@@ -83,29 +84,74 @@ void Level :: initializeGrid() {
         int total_koopa = remaining_slots * koopa_percentage/100;
         int total_mushroom = remaining_slots * mushroom_percentage/100;
 
-        //spawns coins
-        char coin = 'c';
-        spawn_object(total_coin, coin);
-        remaining_slots -= total_coin;
 
-        //spawns nothing
-        char nothing = 'x';
-        spawn_object(total_nothing, nothing);
-        remaining_slots -= total_nothing;
+        // for spawning coins
+        int total_characters = 0;
+        while (total_characters < total_coin) {
+            if (grid[i_random][j_random]->getDisplayCharacter() == '\0') {
+                grid[i_random][j_random] = new Coin(level_num, i_random, j_random);                    
+                total_characters++;
+                remaining_slots--;
+            }
+            else {
+                int_random();
+            }
+        }
 
-        //spawns goomba
-        char goomba = 'g';
-        spawn_object(total_goomba, goomba);
-        remaining_slots -= total_goomba;
+    
+        //for spawning nothing
+        total_characters = 0;
+        while (total_characters < total_nothing) {
+            if (grid[i_random][j_random]->getDisplayCharacter() == '\0') {
+                grid[i_random][j_random] = new Nothing(level_num, i_random, j_random);                    
+                total_characters++;
+                remaining_slots--;
+            }
+            else {
+                int_random();
+            }
+        }
 
-        //spawns koopa
-        char koopa = 'k';
-        spawn_object(total_koopa, koopa);
-        remaining_slots -= total_koopa;
 
-        //spawns mushroom
-        char mushroom = 'm';
-        spawn_object(remaining_slots, mushroom);
+        //for spawning goomba       
+        total_characters = 0;
+        while (total_characters < total_goomba) {
+            if (grid[i_random][j_random]->getDisplayCharacter() == '\0') {
+                grid[i_random][j_random] = new Goomba(level_num, i_random, j_random);                    
+                total_characters++;
+                remaining_slots--;
+            }
+            else {
+                int_random();
+            }
+        }
+
+        //for spawning koopa
+        total_characters = 0;
+        while (total_characters < total_koopa) {
+            if (grid[i_random][j_random]->getDisplayCharacter() == '\0') {
+                grid[i_random][j_random] = new Koopa(level_num, i_random, j_random);                    
+                total_characters++;
+                remaining_slots--;
+            }
+            else {
+                int_random();
+            }
+        }
+
+
+        //for spawning mushroom
+        total_characters = 0;
+        while (total_characters < remaining_slots) {
+            if (grid[i_random][j_random]->getDisplayCharacter() == '\0') {
+                grid[i_random][j_random] = new Mushroom(level_num, i_random, j_random);                    
+                total_characters++;
+            }
+            else {
+                int_random();
+            }
+        }
+
 
 
     }
@@ -119,27 +165,16 @@ void Level :: int_random() {
     j_random = rand() % index;
 }
 
-void Level :: spawn_object(int num, char c) {
-    int total_characters = 0;
-    while (total_characters < num) {
-        if (grid[i_random][j_random] == ' ') {
-            grid[i_random][j_random] = c;
-            total_characters++;
-        }
-        else {
-            int_random();
-        }
-        
-    }
-}
 
 
 void Level :: printLevel() {
     for (int i = 0; i < dimension; ++i) {
-        for(int j = 0; j < dimension; ++j) {
-            cout << grid[i][j];
+        if(i != 0) {
+           cout << endl; 
         }
-        cout << endl;
+        for(int j = 0; j < dimension; ++j) {
+            cout << grid[i][j]->getDisplayCharacter();
+        }
     }
     
 }
