@@ -32,7 +32,7 @@ void World :: initializeWorld() {
 }
 
 void World :: printWorld() {
-    for (int i = total_levels - 1; i >= 0; --i) {
+    for (int i = 0; i < total_levels; ++i) {
         levels[i]->printLevel();
         cout << "==========" << endl;
     }

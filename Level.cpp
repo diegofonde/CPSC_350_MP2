@@ -66,11 +66,14 @@ void Level :: initializeGrid() {
         remaining_slots--;
 
         // for spawning warp pipe
-        if (level_num == total_levels) {
-            for(int i = 0; i < 1; ++i) {
+
+        if (level_num < total_levels) {
+            int total_characters = 0;
+            while (total_characters < 1) {
                 if (grid[i_random][j_random]->getDisplayCharacter() == '\0') {
-                    grid[i_random][j_random] = new LevelBoss(level_num, i_random, j_random);
-                    remaining_slots -= 1;
+                    grid[i_random][j_random] = new WarpPipe(level_num, i_random, j_random);                    
+                    total_characters++;
+                    remaining_slots--;
                 }
                 else {
                     int_random();
@@ -78,6 +81,7 @@ void Level :: initializeGrid() {
             }
         }
 
+        
         int total_coin = remaining_slots * coin_percentage/100;
         int total_nothing = remaining_slots * nothing_percentage/100;
         int total_goomba = remaining_slots * goomba_percentage/100;
@@ -178,3 +182,8 @@ void Level :: printLevel() {
     }
     
 }
+
+// void Level :: spawnMario() {
+//     int_random();
+//     grid[i_random][j_random] = new Mario(level_num, i_random, j_random, total_lives);
+// }
