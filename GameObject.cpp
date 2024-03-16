@@ -35,3 +35,7 @@ int GameObject::getLocationX(){
 int GameObject::getLocationY(){
     return locationY;
 }
+
+void GameObject::setDisplayCharacter(char c) {
+    displayCharacter = c;
+}

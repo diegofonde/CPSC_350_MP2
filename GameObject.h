@@ -14,6 +14,9 @@ class GameObject{
         int getLocationX(); //returns locationX
         int getLocationY(); //returns locationY
 
+        //setter methods
+        void setDisplayCharacter(char c); //sets displayCharacter
+
     protected: 
         int level; //what level the object is in
         int locationX; //x location of the object
