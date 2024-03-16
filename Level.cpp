@@ -58,8 +58,6 @@ Level :: ~Level() {
     }
 
     delete grid;
-
-    delete mario;
 }
 
 int Level :: level_num = 0;
@@ -126,7 +124,8 @@ void Level :: initializeGrid() {
         total_characters = 0;
         while (total_characters < total_nothing) {
             if (grid[i_random][j_random]->getDisplayCharacter() == '\0') {
-                grid[i_random][j_random] = new Nothing(level_num, i_random, j_random);                    
+                grid[i_random][j_random] = new GameObject(level_num, i_random, j_random); 
+                grid[i_random][j_random]->setDisplayCharacter('x');
                 total_characters++;
                 remaining_slots--;
             }
@@ -200,6 +199,7 @@ void Level :: printLevel() {
             cout << grid[i][j]->getDisplayCharacter();
         }
     }
+    cout << "==========" << endl;
     
 }
 
@@ -212,8 +212,8 @@ void Level::addMario(Mario* mario){
 }
 
 void Level::updateMarioInLevel(Mario* mario){
-    GameObject *temp = grid[mario->getLocationX()][mario->getLocationY()];
-    grid[mario->getLocationX()][mario->getLocationY()] = mario;
+    GameObject *temp = grid[mario->getLocationY()][mario->getLocationX()];
+    grid[mario->getLocationY()][mario->getLocationX()] = mario;
     //std::cout << temp->getDisplayCharacter() << std::endl;
 
     printLevel();
@@ -249,8 +249,9 @@ void Level::updateMarioInLevel(Mario* mario){
 
     void Level::clearMarioFromLevel(Mario* mario){
         if (mario->getLevel() < level_num){
-            if (grid[mario->getLocationX()][mario->getLocationY()]->getDisplayCharacter() == 'H'){ //prevents clearing a spot if mario has changed levels
-                grid[mario->getLocationX()][mario->getLocationY()] = new Nothing(mario->getLevel(), mario->getLocationX(), mario->getLocationY());
+            if (grid[mario->getLocationY()][mario->getLocationX()]->getDisplayCharacter() == 'H'){ //prevents clearing a spot if mario has changed levels
+                grid[mario->getLocationY()][mario->getLocationX()] = new GameObject(mario->getLevel(), mario->getLocationY(), mario->getLocationX());
+                grid[mario->getLocationY()][mario->getLocationX()]->setDisplayCharacter('x');
             }
         }
     }

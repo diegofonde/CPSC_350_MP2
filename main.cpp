@@ -13,7 +13,7 @@
 int main(){
     Game *testGame = new Game("input-spec.txt", "log.txt");
     testGame->runGame();
-    //delete testGame;
+    delete testGame;
 
     /*LevelBoss *testGoomba = new LevelBoss(0,0,0);   
     std::cout << testGoomba->getDisplayCharacter() << std::endl;

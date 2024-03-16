@@ -12,7 +12,6 @@
 #include "LevelBoss.h"
 #include "Coin.h"
 #include "WarpPipe.h"
-#include "Nothing.h"
 #include "Mushroom.h"
 using namespace std;
 

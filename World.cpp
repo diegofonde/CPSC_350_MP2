@@ -31,8 +31,6 @@ World :: ~World() {
     }
 
     delete levels;
-
-    delete mario;
 }
 
 void World::addMario(Mario* mario){
@@ -62,7 +60,7 @@ void World :: initializeWorld() {
 void World :: printWorld() {
     for (int i = 0; i < total_levels; ++i) {
         levels[i]->printLevel();
-        cout << "==========" << endl;
+        // cout << "==========" << endl;
     }
     
 }
