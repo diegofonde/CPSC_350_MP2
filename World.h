@@ -23,7 +23,9 @@ class World {
         World(int num_levels, int level_size, int cp, int np, int gp, int kp, int mp); //overloaded constructor
 
         void addMario(Mario* mario); //passing in Mario to the World
-        // ~World();
+        void placeMarioInWorld(); //places mario in the world
+        void updateMarioInWorld(Mario* mario); //updates the world to refelct mario's position/changes
+        ~World();
         void printWorld(); //prints out all the levels in world
 
 };

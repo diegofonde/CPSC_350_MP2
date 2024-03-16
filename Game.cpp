@@ -7,20 +7,27 @@ Game::Game(std::string inputFile, std::string outputFile){
     gameOver = false;
 
     mario = new Mario(V);
-    mario->setN(N);
     world = new World(L, N, coinPercent, blankPercent, goombaPercent, koopaPercent, mushroomPercent);
 }
 
 Game::~Game(){
     //TODO: delete mario
     delete world;
+    delete mario;
 }
 
 void Game::runGame(){
     world->printWorld();
-    mario->placeMario();
+    mario->placeMario(N);
     world->addMario(mario);
-    world->printWorld();
+    world->updateMarioInWorld(mario);
+    while (!isGameOver()){
+        mario->move(N);
+        //std::cout << "Mario Level: " << mario->getLevel() << std::endl;
+        world->updateMarioInWorld(mario);
+        //std::cout << "Mario Level: " << mario->getLevel() << std::endl;
+    }
+    //world->printWorld();
     //add mario to world
 
     //loop:
@@ -30,6 +37,18 @@ void Game::runGame(){
     //check for gameOver
 
     //TODO: implement game loop
+}
+
+bool Game::isGameOver(){
+    if (mario->getLives() <= 0){
+        std::cout << "mario lost" << std::endl;
+        return true;
+    }
+    else if (mario->getLevel() > L-1){
+        std::cout << "mario won" << std::endl;
+        return true;
+    }
+    return false;
 }
 
 void Game::processFile(std::string inputFile){

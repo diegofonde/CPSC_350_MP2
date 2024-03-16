@@ -17,6 +17,7 @@ class Game{
     
     private:
         void processFile(std::string inputFile); //reads the inputFile and assigns variables
+        bool isGameOver(); //returns if the game is over or not
 
         int L; //number of levels
         int N; //the dimension of the grid

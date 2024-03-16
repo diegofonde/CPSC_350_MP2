@@ -17,7 +17,7 @@ GameObject::GameObject(int level, int locationX, int locationY){
 }
 
 GameObject::~GameObject(){
-    std::cout << "object deleted" << std::endl;
+    //std::cout << "object deleted" << std::endl;
 }
 
 char GameObject::getDisplayCharacter(){

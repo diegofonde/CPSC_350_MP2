@@ -36,10 +36,19 @@ World :: ~World() {
 }
 
 void World::addMario(Mario* mario){
-    mario = mario;
-    // mario->setN(dimension); setter doesn't work
-    // cout << mario->getN() << endl;
-    levels[0]->addMario(mario);
+    //mario = mario;
+    //levels[mario->getLevel()]->addMario(mario);
+    //std::cout << mario->getLevel() << std::endl;
+}
+
+void World::placeMarioInWorld(){
+    
+}
+
+void World::updateMarioInWorld(Mario* mario){
+    levels[mario->getLevel()]->updateMarioInLevel(mario);
+    //std::cout << "Mario Level: " << mario->getLevel() << std::endl;
+    levels[mario->getLevel()]->clearMarioFromLevel(mario);
 }
 
 //Keeps making level objects based on the value of total_levels

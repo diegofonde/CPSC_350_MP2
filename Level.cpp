@@ -1,5 +1,6 @@
 #include "Level.h"
 #include <cstdlib>
+#include <typeinfo>
 
 Level::Level() {
     srand((unsigned) time(NULL));
@@ -205,7 +206,51 @@ void Level :: printLevel() {
 void Level::addMario(Mario* mario){
     mario = mario;
     std::cout << mario->getLocationX() << std::endl;
-    cout << mario->getLocationY() << endl;
-    grid[mario->getLocationX()][mario->getLocationY()] = mario;
+    std::cout << mario->getLocationY() << std::endl;
+    //grid[mario->getLocationX()][mario->getLocationY()] = mario;
     //make mario interact with object 
 }
+
+void Level::updateMarioInLevel(Mario* mario){
+    GameObject *temp = grid[mario->getLocationX()][mario->getLocationY()];
+    grid[mario->getLocationX()][mario->getLocationY()] = mario;
+    //std::cout << temp->getDisplayCharacter() << std::endl;
+
+    printLevel();
+    marioInteractsInLevel(mario, temp);
+    delete temp;
+
+}
+
+    void Level::marioInteractsInLevel(Mario *mario, GameObject *temp){
+        bool marioCompletesInteraction = false; //tracks if mario has completed the interaction or needs to try again e.g: defeating an enemy
+        //std::cout << mario->getLives() << std::endl;
+        while (!marioCompletesInteraction && (mario->getLives() > 0)){
+            if (temp->getDisplayCharacter() == 'g' || temp->getDisplayCharacter() == 'k' || temp->getDisplayCharacter() == 'b'){
+                GameEnemy* gameEnemy = static_cast<GameEnemy*>(temp); //converting temp to gameEnemy type for the interact method
+                std::cout << "mario interacts with enemy" << std::endl;
+                marioCompletesInteraction = mario->interactWithEnemy(*gameEnemy, dimension);
+            }
+            else if (temp->getDisplayCharacter() != 'x'){
+                //mario interacts with object
+                std::cout << "mario interacts with object" << std::endl;  
+                marioCompletesInteraction = mario->interactWithObject(temp, dimension);
+            }
+            else{
+                //mario is on a blank space, nothing happens
+                std::cout << "mario is on a blank space" << std::endl;
+                marioCompletesInteraction = true;
+            }
+        }
+
+        std::cout << "mario completes interaction" << std::endl;
+
+    }
+
+    void Level::clearMarioFromLevel(Mario* mario){
+        if (mario->getLevel() < level_num){
+            if (grid[mario->getLocationX()][mario->getLocationY()]->getDisplayCharacter() == 'H'){ //prevents clearing a spot if mario has changed levels
+                grid[mario->getLocationX()][mario->getLocationY()] = new Nothing(mario->getLevel(), mario->getLocationX(), mario->getLocationY());
+            }
+        }
+    }
