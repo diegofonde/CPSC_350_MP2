@@ -3,4 +3,5 @@
 
 WarpPipe::WarpPipe(int level, int locationX, int locationY) : GameObject(level, locationX, locationY){
     displayCharacter = 'w';
+    objectName = "WarpPipe";
 }

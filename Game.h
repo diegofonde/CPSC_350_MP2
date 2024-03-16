@@ -18,6 +18,8 @@ class Game{
     private:
         void processFile(std::string inputFile); //reads the inputFile and assigns variables
         bool isGameOver(); //returns if the game is over or not
+        void updateOutputString(); //updates the outputString
+        void clearOutputString(); //clears the outputString
 
         int L; //number of levels
         int N; //the dimension of the grid
@@ -30,7 +32,8 @@ class Game{
         bool gameOver; //whether the game is over or not
         World *world; //the world
         Mario *mario; //mario
-        std::ofstream writeFile;
+        std::ofstream writeFile; //the file writer
+        std::string outputString; //string to be outputted in the log
 
 };
 

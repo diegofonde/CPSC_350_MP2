@@ -2,6 +2,7 @@
 #define WORLD_H
 
 #include <iostream>
+#include <fstream>
 #include "Level.h"
 #include "Mario.h"
 using namespace std;
@@ -24,7 +25,7 @@ class World {
 
         void addMario(Mario* mario); //passing in Mario to the World
         void placeMarioInWorld(); //places mario in the world
-        void updateMarioInWorld(Mario* mario); //updates the world to refelct mario's position/changes
+        bool updateMarioInWorld(Mario* mario, std::ofstream& output, std::string& outputString); //updates the world to refelct mario's position/changes
         ~World();
         void printWorld(); //prints out all the levels in world
         void outputWorld(ofstream& output); //outputs all the levels in world to outputFile

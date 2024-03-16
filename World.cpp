@@ -43,10 +43,13 @@ void World::placeMarioInWorld(){
     
 }
 
-void World::updateMarioInWorld(Mario* mario){
-    levels[mario->getLevel()]->updateMarioInLevel(mario);
-    //std::cout << "Mario Level: " << mario->getLevel() << std::endl;
-    levels[mario->getLevel()]->clearMarioFromLevel(mario);
+bool World::updateMarioInWorld(Mario* mario, std::ofstream& output, std::string& outputString){
+    bool marioMoves = levels[mario->getLevel()]->updateMarioInLevel(mario, output, outputString);
+    if (marioMoves && (mario->getLives() > 0)){ //if mario moves, his space is cleared from the level
+        levels[mario->getLevel()]->clearMarioFromLevel(mario);
+    }
+    //output << "test" << endl;
+    return marioMoves;
 }
 
 //Keeps making level objects based on the value of total_levels
@@ -60,13 +63,13 @@ void World :: initializeWorld() {
 void World :: printWorld() {
     for (int i = 0; i < total_levels; ++i) {
         levels[i]->printLevel();
-        // cout << "==========" << endl;
+        cout << "==========" << endl;
     }
 }
     
-void World::outputWorld(ofstream& ouptut){
+void World::outputWorld(ofstream& output){
     for (int i = 0; i < total_levels; ++i) {
-        //levels[i]->outputLevel();
-        // cout << "==========" << endl;
+        levels[i]->outputLevel(output);
+        cout << "==========" << endl;
     }
 }

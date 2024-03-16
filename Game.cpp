@@ -20,25 +20,46 @@ Game::~Game(){
 
 void Game::runGame(){
     world->printWorld();
+    world->outputWorld(writeFile);
     mario->placeMario(N);
+    mario->setTotalLevels(L);
+
+    writeFile << "Mario is starting in position: (" << mario->getLocationX() << ", " << mario->getLocationY() << ")" << endl;
+    writeFile << "==========" << endl;
+    //updateOutputString();
+
     world->addMario(mario);
-    world->updateMarioInWorld(mario);
-    while (!isGameOver()){
-        mario->move(N);
-        //std::cout << "Mario Level: " << mario->getLevel() << std::endl;
-        world->updateMarioInWorld(mario);
-        //std::cout << "Mario Level: " << mario->getLevel() << std::endl;
+
+    /*for (int i = 0; i < 20; i++){
+        updateOutputString();
+        bool marioMoves = world->updateMarioInWorld(mario, writeFile, outputString);
+    //TODO: coin not working properly?
+    if (marioMoves){
+        mario->move(N, outputString);
     }
-    //world->printWorld();
-    //add mario to world
-
-    //loop:
-    //mario interacts, loop for repeated interaction inside level
-    //mario moves
-    //update level to reflect mario moving
-    //check for gameOver
-
-    //TODO: implement game loop
+    writeFile << outputString << endl;
+    writeFile << "==========" << endl;
+    std::cout << outputString << std::endl;
+    clearOutputString();
+    }*/
+    while (!isGameOver()){
+        updateOutputString();
+        bool marioMoves = world->updateMarioInWorld(mario, writeFile, outputString);
+        if (marioMoves){
+            mario->move(N, outputString);
+        }
+        if (mario->getLevel() > L-1){
+            outputString += " MARIO WON THE GAME!";
+        }
+        else if (!(mario->getLives() > 0)){
+            outputString += " Mario has died :(";
+        }
+        writeFile << outputString << endl;
+        writeFile << "==========" << endl;
+        clearOutputString();
+        //TODO: output world
+    }
+    writeFile.close();
 }
 
 bool Game::isGameOver(){
@@ -50,6 +71,9 @@ bool Game::isGameOver(){
         std::cout << "mario won" << std::endl;
         return true;
     }
+    //else if (mario->getMarioHasWon()){
+        //return true;
+    //}
     return false;
 }
 
@@ -84,7 +108,15 @@ void Game::processFile(std::string inputFile){
 
         lineNum++;
     }
+}
 
-    //std::cout << koopaPercent << std::endl;
+void Game::updateOutputString(){
+    outputString += "Level: " + std::to_string(mario->getLevel()) + ".";
+    outputString += " Mario is at position (" + std::to_string(mario->getLocationX()) + ", " + std::to_string(mario->getLocationY()) + ").";
+    outputString += " Mario is at power level " + std::to_string(mario->getPowerLevel()) + ".";
+}
+
+void Game::clearOutputString(){
+    outputString = "";
 }
 

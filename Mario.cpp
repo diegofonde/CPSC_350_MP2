@@ -34,7 +34,7 @@ void Mario::placeMario(int N){
     locationY = rand() % (index);
 }
 
-void Mario::move(int N){
+void Mario::move(int N, std::string &outputString){
     std::cout << "LocationX: " << locationX << " locationY: " << locationY << std::endl;
     int moveDirection = rand() % 4;
     std::cout << moveDirection << std::endl;
@@ -42,18 +42,22 @@ void Mario::move(int N){
         case 0: //up
             locationY++;
             std::cout << "mario moved up" << std::endl;
+            outputString += " Mario will move up.";
             break;
         case 1: //down
             locationY--;
             std::cout << "mario moved down" << std::endl;
+            outputString += " Mario will move down.";
             break;
         case 2: //left
             locationX--;
             std::cout << "mario moved left" << std::endl;
+            outputString += " Mario will move left.";
             break;
         case 3: //right
             locationX++;
             std::cout << "mario moved right" << std::endl;
+            outputString += " Mario will move right.";
             break;
     }
     adjustForLevelWrapping(N);
@@ -80,83 +84,101 @@ void Mario::adjustForLevelWrapping(int N){
     }
 }
 
-bool Mario::interactWithObject(GameObject *gameObject, int N){
+bool Mario::interactWithObject(GameObject *gameObject, int N, std::string &outputString){
+    //outputString += "mario interacting with object 2";
     switch (gameObject->getDisplayCharacter()){ //tests type of object based on display character
         case 'm':
-            return interactWithMushroom(*gameObject);
+            //outputString += "mario interacting with mushroom";
+            return interactWithMushroom(*gameObject, outputString);
         case 'c':
-            return interactWithCoin(*gameObject);
+        //outputString += "mario interacting with coin";
+            return interactWithCoin(*gameObject, outputString);
         case 'w':
-            return interactWithWarpPipe(*gameObject, N);
-        case 'g' || 'k' || 'b': //gameObject is an enemy
-            //GameEnemy* gameEnemy = static_cast<GameEnemy*>(gameObject);
-            //return interactWithEnemy(*gameEnemy);
-        default:
-            return false;
-            //TODO: throw error
+        //outputString += "mario interacting with warp pipe";
+            return interactWithWarpPipe(*gameObject, N, outputString);
     }
+    return false;
 }
 
-bool Mario::interactWithMushroom(GameObject mushroom){
-    std::cout << "mario ate a mushroom" << std::endl;
+bool Mario::interactWithMushroom(GameObject mushroom, std::string &outputString){
+    outputString += " Mario ate a mushroom.";
     if (powerLevel != 2){
         powerLevel++;
     }
     return true;
 }
 
-bool Mario::interactWithCoin(GameObject coin){
-    std::cout << "mario picked up a coin" << std::endl;
+bool Mario::interactWithCoin(GameObject coin, std::string &outputString){
+    outputString += " Mario picked up a coin.";
     if (++coins == 20){
         coins = 0;
         V++;
     }
-    else{
-        coins++;
-    }
     return true;
 }
 
-bool Mario::interactWithWarpPipe(GameObject warpPipe, int N){
-    std::cout << "mario traveled through a warp pipe" << std::endl;
+bool Mario::interactWithWarpPipe(GameObject warpPipe, int N, std::string &outputString){
+    outputString += " Mario found a warp pipe.";
     level++;
     placeMario(N);
     return true;
 }
 
-bool Mario::interactWithEnemy(GameEnemy enemy, int N){
+bool Mario::interactWithEnemy(GameEnemy enemy, int N, std::string &outputString){
     int successChance = rand() % 100; //TODO: improve random number?
     std::cout << "enemy" << std::endl;
+    outputString += " Mario encountered a " + enemy.getObjectName() + " and ";
     if (successChance > enemy.getwinPercent()){ //mario Wins
-        marioDefeatsEnemy(enemy, N);
+        marioDefeatsEnemy(enemy, N, outputString);
         return true;
     }
     else{ //mario looses
+        outputString += "lost.";
         if (enemy.getDisplayCharacter() == 'b'){
             marioLosesToBoss();
         }
         else{
             marioLosesToEnemy();
         }
+        if (V <= 0){ //mario is dead
+                return true;
+            }
         return false;
     }
 }
 
-void Mario::marioDefeatsEnemy(GameEnemy enemy, int N){
+void Mario::marioDefeatsEnemy(GameEnemy enemy, int N, std::string &outputString){
     if (++enemiesDefeated == 7){ //adds another life if mario has defeated 7 enemies
         V++;
         enemiesDefeated = 0;
         std::cout << "mario has defeated 7 enemies and gained a life" << std::endl;
     }
+    std::cout << "mario defeats enemy" << std::endl;
     if (enemy.getDisplayCharacter() == 'b'){ //mario has defeated a boss
         marioDefeatsBoss(enemy, N);
+        if (level < totalLevels){
+            outputString += "won, so will advance to the next level.";
+        }
+        else{
+            outputString += "won.";
+        }
     }
-    std::cout << "mario defeats enemy" << std::endl;
+    else{
+        outputString += "won.";
+    }
 }
 
 void Mario::marioDefeatsBoss(GameEnemy boss, int N){
+    //if (level == totalLevels - 1){ //mario has won
+        //marioHasWon = true;
+        //std::cout << "mario has beat the last level" << std::endl;
+    //}
+    //else{
         level++;
         placeMario(N);
+    //}
+    //std::cout << "setting lives to 0 for a test" << std::endl;
+    //V = 0;
     std::cout << "mario defeats boss" << std::endl;
 }
 
@@ -196,4 +218,12 @@ void Mario::setTotalLevels(int totalLevels){
 
 int Mario::getLives(){
     return V;
+}
+
+int Mario::getPowerLevel(){
+    return powerLevel;
+}
+
+int Mario::getCoins(){
+    return coins;
 }

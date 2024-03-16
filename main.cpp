@@ -14,7 +14,7 @@ int main(int argc, char* argv[]){
 
     Game *testGame = new Game("input-spec.txt", "log2.txt");
     testGame->runGame();
-    delete testGame;
+    //delete testGame;
 
     /*std::string inputFile = (std::string)argv[1];
     std::string outputFile = (std::string)argv[2];

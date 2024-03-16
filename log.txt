@@ -1,0 +1,30 @@
+mkcxb
+kcckc
+xgxgk
+mwkxg
+xkxgm
+==========
+mkxcx
+kbmxg
+kkmcm
+kggxm
+mckxx
+==========
+Mario is starting in position: (3,1)
+==========
+mkcxb
+kcckc
+xgxgk
+mHkxg
+xkxgm
+==========
+Level: 0. Mario is at position: (3,1). Mario is at power level 0. Mario found a warp pipe. Mario has 3 lives left. Mario has 0 coins. Mario will WARP. 
+==========
+mkxcx
+kHmxg
+kkmcm
+kggxm
+mckxx
+==========
+Level: 1. Mario is at position: (1,1). Mario is at power level 0. Mario encountered a boss and won. Mario has 3 lives left. Mario has 0 coins. Mario will stay put. 
+WE BEAT THE GAME! :)

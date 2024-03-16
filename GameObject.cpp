@@ -7,6 +7,7 @@ GameObject::GameObject(){
     locationX = 0;
     locationY = 0;
     displayCharacter = '\0';
+    objectName = "object";
 }
 
 GameObject::GameObject(int level, int locationX, int locationY){
@@ -34,6 +35,10 @@ int GameObject::getLocationX(){
 
 int GameObject::getLocationY(){
     return locationY;
+}
+
+std::string GameObject::getObjectName(){
+    return objectName;
 }
 
 void GameObject::setDisplayCharacter(char c) {
