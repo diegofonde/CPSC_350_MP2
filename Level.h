@@ -38,6 +38,7 @@ class Level {
         Level(int num_levels, int level_size, int cp, int np, int gp, int kp, int mp); //overloaded constructor
         ~Level();
         void printLevel(); //prints level
+        void outputLevel(std::ofstream& output); //outputs level to file
         void addMario(Mario* mario); //adds mario to the level
         void updateMarioInLevel(Mario* mario); //updates mario's location in the level
         void marioInteractsInLevel(Mario *mario, GameObject *temp); //handles mario's interactions with the object, ensures mario completes interaction

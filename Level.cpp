@@ -203,6 +203,18 @@ void Level :: printLevel() {
     
 }
 
+void Level :: outputLevel(ofstream& output) {
+    for (int i = 0; i < dimension; ++i) {
+        if(i != 0) {
+           output << "" << endl; 
+        }
+        for(int j = 0; j < dimension; ++j) {
+            cout << grid[i][j]->getDisplayCharacter();
+        }
+    }
+    cout << "==========" << endl;
+}
+
 void Level::addMario(Mario* mario){
     mario = mario;
     std::cout << mario->getLocationX() << std::endl;

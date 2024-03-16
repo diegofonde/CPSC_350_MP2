@@ -30,6 +30,7 @@ class Game{
         bool gameOver; //whether the game is over or not
         World *world; //the world
         Mario *mario; //mario
+        std::ofstream writeFile;
 
 };
 

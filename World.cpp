@@ -62,5 +62,11 @@ void World :: printWorld() {
         levels[i]->printLevel();
         // cout << "==========" << endl;
     }
+}
     
+void World::outputWorld(ofstream& ouptut){
+    for (int i = 0; i < total_levels; ++i) {
+        //levels[i]->outputLevel();
+        // cout << "==========" << endl;
+    }
 }

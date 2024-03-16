@@ -8,6 +8,8 @@ Game::Game(std::string inputFile, std::string outputFile){
 
     mario = new Mario(V);
     world = new World(L, N, coinPercent, blankPercent, goombaPercent, koopaPercent, mushroomPercent);
+
+    writeFile.open(outputFile);
 }
 
 Game::~Game(){

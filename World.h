@@ -27,6 +27,7 @@ class World {
         void updateMarioInWorld(Mario* mario); //updates the world to refelct mario's position/changes
         ~World();
         void printWorld(); //prints out all the levels in world
+        void outputWorld(ofstream& output); //outputs all the levels in world to outputFile
 
 };
 
