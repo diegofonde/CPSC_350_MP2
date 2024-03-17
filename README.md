@@ -13,7 +13,7 @@ This is assignment 2, otherwise known as Mario.
 ## Source Files
 
 * main.cpp
-* log.txt
+* log2.txt
 * input-spec.txt
 * World.h
 * World.cpp
