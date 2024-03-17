@@ -69,11 +69,11 @@ Level :: ~Level() {
     }
     
     for (int i = 0; i < dimension; ++i) {
-        delete grid[i];
+        delete[] grid[i];
     }
     std::cout << "grid deleted" << std::endl;
 
-    delete grid;
+    delete[] grid;
     std::cout << "grid fully deleted" << std::endl;
 }
 
