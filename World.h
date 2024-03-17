@@ -30,7 +30,6 @@ class World {
         void printWorld(); //prints out all the levels in world
         void outputWorld(ofstream& output); //outputs all the levels in world to outputFile
         void removeMario(Mario* mario); //removes mario from the world
-
 };
 
 #endif

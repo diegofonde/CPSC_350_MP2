@@ -12,32 +12,20 @@ Mario::Mario(int inputV) : GameObject(){
     coins = 0;
     powerLevel = 0;
     enemiesDefeated = 7;
-    marioHasWon = false;
-    //std::cout << V << std::endl;
 }
 
-//Needed??
-Mario::Mario(int level, int locationX, int locationY, int V) : GameObject(level, locationX, locationY){
-    srand((unsigned) time(NULL));
-    displayCharacter = 'H';
-    V = V;
-    coins = 0;
-    powerLevel = 0;
-    enemiesDefeated = 0;
-    locationX = 5;
+Mario::~Mario(){
+    //no pointers to delete
 }
 
 void Mario::placeMario(int N){
-    int index = N - 1; //if you want to double check if the randomizer works just replace N with the dimensions of level
-    //std::cout << N << std::endl;
+    int index = N - 1; 
     locationX = rand() % (index);
     locationY = rand() % (index);
 }
 
 void Mario::move(int N, std::string &outputString){
-    std::cout << "LocationX: " << locationX << " locationY: " << locationY << std::endl;
     int moveDirection = rand() % 4;
-    std::cout << moveDirection << std::endl;
     switch (moveDirection){
         case 0: //down
             locationY++;
@@ -64,8 +52,6 @@ void Mario::move(int N, std::string &outputString){
 }
 
 void Mario::adjustForLevelWrapping(int N){
-    //std::cout << "wrapping called" << std::endl;
-    std::cout << "LocationX: " << locationX << " locationY: " << locationY << std::endl;
     if (locationY >= N){ //up
         locationY = 0;
         std::cout << "wrapping up" << std::endl;
@@ -85,16 +71,12 @@ void Mario::adjustForLevelWrapping(int N){
 }
 
 bool Mario::interactWithObject(GameObject *gameObject, int N, std::string &outputString){
-    //outputString += "mario interacting with object 2";
     switch (gameObject->getDisplayCharacter()){ //tests type of object based on display character
         case 'm':
-            //outputString += "mario interacting with mushroom";
             return interactWithMushroom(*gameObject, outputString);
         case 'c':
-        //outputString += "mario interacting with coin";
             return interactWithCoin(*gameObject, outputString);
         case 'w':
-        //outputString += "mario interacting with warp pipe";
             return interactWithWarpPipe(*gameObject, N, outputString);
     }
     return false;
@@ -125,8 +107,7 @@ bool Mario::interactWithWarpPipe(GameObject warpPipe, int N, std::string &output
 }
 
 bool Mario::interactWithEnemy(GameEnemy enemy, int N, std::string &outputString){
-    int successChance = rand() % 100; //TODO: improve random number?
-    std::cout << "enemy" << std::endl;
+    int successChance = rand() % 100; 
     outputString += " Mario encountered a " + enemy.getObjectName() + " and ";
     if (successChance > enemy.getwinPercent()){ //mario Wins
         marioDefeatsEnemy(enemy, N, outputString);
@@ -169,16 +150,8 @@ void Mario::marioDefeatsEnemy(GameEnemy enemy, int N, std::string &outputString)
 }
 
 void Mario::marioDefeatsBoss(GameEnemy boss, int N){
-    //if (level == totalLevels - 1){ //mario has won
-        //marioHasWon = true;
-        //std::cout << "mario has beat the last level" << std::endl;
-    //}
-    //else{
-        level++;
-        placeMario(N);
-    //}
-    //std::cout << "setting lives to 0 for a test" << std::endl;
-    //V = 0;
+    level++;
+    placeMario(N);
     std::cout << "mario defeats boss" << std::endl;
 }
 
@@ -207,10 +180,6 @@ void Mario::marioLosesALife(){
     powerLevel = 0;
     enemiesDefeated = 0;
 }
-
-// int Mario :: getN() {
-//     return N;
-// }
 
 void Mario::setTotalLevels(int totalLevels){
     totalLevels = totalLevels;

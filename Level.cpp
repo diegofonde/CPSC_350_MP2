@@ -56,7 +56,7 @@ Level :: ~Level() {
         std::cout << "" << std::endl;
     }
 
-    std::cout << "deleting now" << std::endl;
+    std::cout << "deleting  level " << level_num << " now" << std::endl;
 
     for (int i = 0; i < dimension; ++i) {
         for(int j = 0; j < dimension; ++j) {
@@ -65,14 +65,16 @@ Level :: ~Level() {
                 delete grid[i][j];
             }
         }
-        std::cout << "" << std::endl;
+        std::cout << "level deleted" << std::endl;
     }
-    /*
+    
     for (int i = 0; i < dimension; ++i) {
         delete grid[i];
-    }*/
+    }
+    std::cout << "grid deleted" << std::endl;
 
     delete grid;
+    std::cout << "grid fully deleted" << std::endl;
 }
 
 int Level :: level_num = 0;
@@ -188,12 +190,7 @@ void Level :: initializeGrid() {
                 int_random();
             }
         }
-
-
-
     }
-
-
 }
 
 //randomizer that is used to spawn the objects in a random part of the grid
@@ -234,8 +231,6 @@ void Level::addMario(Mario* mario){
     mario = mario;
     std::cout << mario->getLocationX() << std::endl;
     std::cout << mario->getLocationY() << std::endl;
-    //grid[mario->getLocationX()][mario->getLocationY()] = mario;
-    //make mario interact with object 
 }
 
 bool Level::updateMarioInLevel(Mario* mario, std::ofstream& output, std::string &outputString){
@@ -256,15 +251,12 @@ bool Level::updateMarioInLevel(Mario* mario, std::ofstream& output, std::string 
     while (!marioClearedSpace) {
         if (temp->getDisplayCharacter() == 'g' || temp->getDisplayCharacter() == 'k' || temp->getDisplayCharacter() == 'b') {
             GameEnemy* gameEnemy = static_cast<GameEnemy*>(temp);
-            std::cout << "mario interacts with enemy" << std::endl;
             marioClearedSpace = mario->interactWithEnemy(*gameEnemy, dimension, outputString);
         }
         else if (temp->getDisplayCharacter() != 'x') {
-            std::cout << "mario interacts with object" << std::endl;  
             marioClearedSpace = mario->interactWithObject(temp, dimension, outputString);
         }
         else {
-            std::cout << "mario is on a blank space" << std::endl;
             marioClearedSpace = true;
         }
 
@@ -293,51 +285,8 @@ bool Level::updateMarioInLevel(Mario* mario, std::ofstream& output, std::string 
             outputString += " Mario is at power level " + std::to_string(mario->getPowerLevel()) + ".";
         }
     }
-
     return marioClearedSpace;
-        /*bool marioClearedSpace = false; //tracks if mario has completed the interaction or needs to try again e.g: defeating an enemy
-        //outputString += "updating mario interacting in level";
-            if (temp->getDisplayCharacter() == 'g' || temp->getDisplayCharacter() == 'k' || temp->getDisplayCharacter() == 'b'){
-                GameEnemy* gameEnemy = static_cast<GameEnemy*>(temp); //converting temp to gameEnemy type for the interact method
-                //outputString += "mario interacting with enemy";
-                std::cout << "mario interacts with enemy" << std::endl;
-                marioClearedSpace = mario->interactWithEnemy(*gameEnemy, dimension, outputString);
-            }
-            else if (temp->getDisplayCharacter() != 'x'){ //mario interacts with object
-                //outputString += "mario interacting with object";
-                std::cout << "mario interacts with object" << std::endl;  
-                marioClearedSpace = mario->interactWithObject(temp, dimension, outputString);
-            }
-            else{ //mario is on a blank space, nothing happens
-                //outputString += "mario lands on a blank space";
-                std::cout << "mario is on a blank space" << std::endl;
-                marioClearedSpace = true;
-            }
-            outputString += " Mario has " + std::to_string(mario->getLives()) + " lives left.";
-            outputString += " Mario has " + std::to_string(mario->getCoins()) + " coins.";
-
-            if (temp->getDisplayCharacter() == 'w'){
-                outputString += " Mario will WARP.";
-                return false;
-            }
-            else if (marioClearedSpace && temp->getDisplayCharacter() == 'b'){ //mario has defeated a boss and does not move normalls
-                return false;
-            }
-            else if (!marioClearedSpace){ //mario has not cleared the space and must try again
-                outputString += " Mario will stay put.";
-
-                //outputting, then has mario try again against the same object
-                output << outputString << endl;
-                outputLevel(output);
-
-                bool spaceCleared = false;
-                //while (!spaceCleared){
-                    //spaceCleared = marioInteractsInLevel(mario, temp, output, outputString);
-                //}
-            }
-            //TODO: mario defeats boss
-            return marioClearedSpace;*/
-    }
+}
 
     void Level::clearMarioFromLevel(Mario* mario){
         if (mario->getLevel() < level_num){
@@ -349,11 +298,6 @@ bool Level::updateMarioInLevel(Mario* mario, std::ofstream& output, std::string 
     }
 
     void Level::removeMario(Mario* mario){
-        //std::cout << "removing mario from level" <<std::endl;
-        //std::cout << "mario level:" << mario->getLevel() <<std::endl;
-        //std::cout << "currnet level:" << level_num <<std::endl;
         grid[mario->getLocationY()][mario->getLocationX()] = new GameObject(mario->getLevel(), mario->getLocationY(), mario->getLocationX());
-        //std::cout << "removing mario from level 2" <<std::endl;
         grid[mario->getLocationY()][mario->getLocationX()]->setDisplayCharacter('x');
-        //std::cout << "removing mario from level 3" <<std::endl;
     }

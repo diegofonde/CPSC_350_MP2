@@ -26,17 +26,13 @@ World :: World(int num_levels, int level_size, int cp, int np, int gp, int kp, i
 }
 
 World :: ~World() {
-    for (int i = 0; i < total_levels; ++i) {
-        delete levels[i];
-    }
-
-    delete levels;
+    delete[] levels;
 }
 
 void World::addMario(Mario* mario){
-    //mario = mario;
-    //levels[mario->getLevel()]->addMario(mario);
-    //std::cout << mario->getLevel() << std::endl;
+    mario = mario;
+    levels[mario->getLevel()]->addMario(mario);
+    std::cout << mario->getLevel() << std::endl;
 }
 
 void World::placeMarioInWorld(){
@@ -75,6 +71,5 @@ void World::outputWorld(ofstream& output){
 }
 
 void World::removeMario(Mario* mario){
-    std::cout << "removing mario from world" <<std::endl;
     levels[total_levels-1]->removeMario(mario);
 }

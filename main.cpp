@@ -11,11 +11,16 @@
 #include "LevelBoss.h"
 
 int main(int argc, char* argv[]){
-    //std::string inputFile = (std::string)argv[1];
-    //std::string outputFile = (std::string)argv[2];
+    //command line input, comment these out for quicker testing
+    std::string inputFile = (std::string)argv[1];
+    std::string outputFile = (std::string)argv[2];
 
-    Game *testGame = new Game("input-spec.txt", "log2.txt");
-    //Game *testGame = new Game(inputFile, outputFile);
+    //uncomment for quicker testing
+    //Game *testGame = new Game("input-spec.txt", "log2.txt");
+
+    //comment out for quicker testing
+    Game *testGame = new Game(inputFile, outputFile);
+
     testGame->runGame();
     delete testGame;
 }

@@ -14,8 +14,8 @@ Game::Game(std::string inputFile, std::string outputFile){
 
 Game::~Game(){
     world->removeMario(mario);
-    //delete world;
-    //delete mario;
+    delete world;
+    delete mario;
 }
 
 void Game::runGame(){
@@ -46,7 +46,6 @@ void Game::runGame(){
         writeFile << outputString << endl;
         writeFile << "==========" << endl;
         clearOutputString();
-        //TODO: output world
     }
     writeFile.close();
 }
@@ -60,9 +59,6 @@ bool Game::isGameOver(){
         std::cout << "mario won" << std::endl;
         return true;
     }
-    //else if (mario->getMarioHasWon()){
-        //return true;
-    //}
     return false;
 }
 
@@ -72,8 +68,6 @@ void Game::processFile(std::string inputFile){
     int lineNum = 1; //tracks current line of file
 
     while (std::getline(readFile, stringContents)){
-        //std::cout << stringContents << std::endl;
-
         switch (lineNum){ //assigns proper variable with number based on the line
             case 1:
                 L = stoi(stringContents);
@@ -90,9 +84,7 @@ void Game::processFile(std::string inputFile){
             case 7:
                 koopaPercent = stoi(stringContents);
             case 8:
-                mushroomPercent = stoi(stringContents);
-            //default:
-                //throw error?  
+                mushroomPercent = stoi(stringContents); 
         }
 
         lineNum++;
