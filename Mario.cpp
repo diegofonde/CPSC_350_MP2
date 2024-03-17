@@ -39,15 +39,15 @@ void Mario::move(int N, std::string &outputString){
     int moveDirection = rand() % 4;
     std::cout << moveDirection << std::endl;
     switch (moveDirection){
-        case 0: //up
+        case 0: //down
             locationY++;
-            std::cout << "mario moved up" << std::endl;
-            outputString += " Mario will move up.";
-            break;
-        case 1: //down
-            locationY--;
             std::cout << "mario moved down" << std::endl;
             outputString += " Mario will move down.";
+            break;
+        case 1: //up
+            locationY--;
+            std::cout << "mario moved up" << std::endl;
+            outputString += " Mario will move up.";
             break;
         case 2: //left
             locationX--;
