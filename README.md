@@ -51,4 +51,4 @@ This is assignment 2, otherwise known as Mario.
 ## Execution Instructions
 
 * g++ *.cpp -o MP
-* ./MP
+* ./MP input-spec.txt log2.txt
