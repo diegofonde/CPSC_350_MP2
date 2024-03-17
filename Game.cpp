@@ -1,48 +1,36 @@
 #include "Game.h"
 
 Game::Game(std::string inputFile, std::string outputFile){
-    //TODO: create world mario variables
 
+    //getting input variables
     processFile(inputFile);
-    gameOver = false;
-
+    
+    //creating objects
     mario = new Mario(V);
     world = new World(L, N, coinPercent, blankPercent, goombaPercent, koopaPercent, mushroomPercent);
-
     writeFile.open(outputFile);
+
 }
 
 Game::~Game(){
-    //TODO: delete mario
     delete world;
     delete mario;
 }
 
 void Game::runGame(){
-    world->printWorld();
-    world->outputWorld(writeFile);
-    mario->placeMario(N);
-    mario->setTotalLevels(L);
 
+    world->printWorld();
+    world->outputWorld(writeFile); //initial print of the world
+    mario->placeMario(N); //setting marios location to a random spot in grid N
+    mario->setTotalLevels(L); //telling mario how many levels there are in the world, used for gameEnd checking
+
+    //initial log text
     writeFile << "Mario is starting in position: (" << mario->getLocationX() << ", " << mario->getLocationY() << ")" << endl;
     writeFile << "==========" << endl;
-    //updateOutputString();
 
-    world->addMario(mario);
+    world->addMario(mario); //adding maro to the world
 
-    /*for (int i = 0; i < 20; i++){
-        updateOutputString();
-        bool marioMoves = world->updateMarioInWorld(mario, writeFile, outputString);
-    //TODO: coin not working properly?
-    if (marioMoves){
-        mario->move(N, outputString);
-    }
-    writeFile << outputString << endl;
-    writeFile << "==========" << endl;
-    std::cout << outputString << std::endl;
-    clearOutputString();
-    }*/
-    while (!isGameOver()){
+    while (!isGameOver()){ //gameLoop
         updateOutputString();
         bool marioMoves = world->updateMarioInWorld(mario, writeFile, outputString);
         if (marioMoves){

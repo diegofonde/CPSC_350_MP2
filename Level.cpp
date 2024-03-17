@@ -49,13 +49,15 @@ Level :: Level(int num_levels, int level_size, int cp, int np, int gp, int kp, i
 Level :: ~Level() {
     for (int i = 0; i < dimension; ++i) {
         for(int j = 0; j < dimension; ++j) {
-            delete grid[i][j];
+            if (grid[i][j] != nullptr){
+                delete grid[i][j];
+            }
         }
     }
-
+    /*
     for (int i = 0; i < dimension; ++i) {
         delete grid[i];
-    }
+    }*/
 
     delete grid;
 }
