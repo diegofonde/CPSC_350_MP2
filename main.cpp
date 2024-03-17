@@ -17,5 +17,5 @@ int main(int argc, char* argv[]){
     Game *testGame = new Game("input-spec.txt", "log2.txt");
     //Game *testGame = new Game(inputFile, outputFile);
     testGame->runGame();
-    //delete testGame;
+    delete testGame;
 }

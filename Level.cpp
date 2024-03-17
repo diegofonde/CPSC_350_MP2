@@ -260,9 +260,13 @@ bool Level::updateMarioInLevel(Mario* mario, std::ofstream& output, std::string 
 
         if (temp->getDisplayCharacter() == 'w') {
             outputString += " Mario will WARP.";
+                grid[temp->getLocationY()][temp->getLocationX()] = new GameObject(temp->getLevel(), temp->getLocationY(), temp->getLocationX());
+                grid[temp->getLocationY()][temp->getLocationX()]->setDisplayCharacter('x');
             return false;
         }
         else if (marioClearedSpace && temp->getDisplayCharacter() == 'b') {
+            grid[temp->getLocationY()][temp->getLocationX()] = new GameObject(temp->getLevel(), temp->getLocationY(), temp->getLocationX());
+            grid[temp->getLocationY()][temp->getLocationX()]->setDisplayCharacter('x');
             return false;
         }
         else if (!marioClearedSpace) {
