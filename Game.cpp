@@ -13,8 +13,9 @@ Game::Game(std::string inputFile, std::string outputFile){
 }
 
 Game::~Game(){
-    delete world;
-    delete mario;
+    world->removeMario(mario);
+    //delete world;
+    //delete mario;
 }
 
 void Game::runGame(){

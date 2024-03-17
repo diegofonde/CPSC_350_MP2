@@ -50,9 +50,22 @@ Level :: ~Level() {
     for (int i = 0; i < dimension; ++i) {
         for(int j = 0; j < dimension; ++j) {
             if (grid[i][j] != nullptr){
+                std::cout << grid[i][j]->getDisplayCharacter();
+            }
+        }
+        std::cout << "" << std::endl;
+    }
+
+    std::cout << "deleting now" << std::endl;
+
+    for (int i = 0; i < dimension; ++i) {
+        for(int j = 0; j < dimension; ++j) {
+            if (grid[i][j] != nullptr){
+                std::cout << grid[i][j]->getDisplayCharacter();
                 delete grid[i][j];
             }
         }
+        std::cout << "" << std::endl;
     }
     /*
     for (int i = 0; i < dimension; ++i) {
@@ -333,4 +346,14 @@ bool Level::updateMarioInLevel(Mario* mario, std::ofstream& output, std::string 
                 grid[mario->getLocationY()][mario->getLocationX()]->setDisplayCharacter('x');
             }
         }
+    }
+
+    void Level::removeMario(Mario* mario){
+        //std::cout << "removing mario from level" <<std::endl;
+        //std::cout << "mario level:" << mario->getLevel() <<std::endl;
+        //std::cout << "currnet level:" << level_num <<std::endl;
+        grid[mario->getLocationY()][mario->getLocationX()] = new GameObject(mario->getLevel(), mario->getLocationY(), mario->getLocationX());
+        //std::cout << "removing mario from level 2" <<std::endl;
+        grid[mario->getLocationY()][mario->getLocationX()]->setDisplayCharacter('x');
+        //std::cout << "removing mario from level 3" <<std::endl;
     }

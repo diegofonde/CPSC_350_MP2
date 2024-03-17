@@ -73,3 +73,8 @@ void World::outputWorld(ofstream& output){
         cout << "==========" << endl;
     }
 }
+
+void World::removeMario(Mario* mario){
+    std::cout << "removing mario from world" <<std::endl;
+    levels[total_levels-1]->removeMario(mario);
+}

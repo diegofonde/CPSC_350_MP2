@@ -44,6 +44,7 @@ class Level {
         bool updateMarioInLevel(Mario* mario, std::ofstream& output, std::string &outputString); //updates mario's location in the level
         bool marioInteractsInLevel(Mario *mario, GameObject *temp, std::ofstream& output, std::string &outputString); //handles mario's interactions with the object, ensures mario completes interaction
         void clearMarioFromLevel(Mario *mario); //clears mario's space from the level sp mario can move again
+        void removeMario(Mario* mario); //removes mario from the level
 };
 
 #endif
